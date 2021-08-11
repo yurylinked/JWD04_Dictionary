@@ -9,29 +9,36 @@ import java.util.Scanner;
 
 public class InputProcessor extends DictionaryService implements Console {
     boolean isRunning = true;
+
     @Override
     public void main() {
         Scanner num = new Scanner(System.in);
         saveWord();
-        while (isRunning) {
-            menu();
-            String choice = num.nextLine();
-            computation(choice);
+        try {
+            while (isRunning) {
+                menu();
+                String choice = num.nextLine();
+                computation(choice);
+            }
+        } catch (DictionaryWordNotFoundException e) {
+
         }
     }
+
     private void printConsole(final String message) {
         System.out.println(message);
     }
+
     @Override
     public void menu() {
         System.out.println(" ");
-        System.out.println("Hello human, let's start!");
+        System.out.println("Hello human, let's translate!");
         System.out.println("-----------");
         System.out.println("1. Put new words");
-        System.out.println("2. Find translate");
-        System.out.println("3. Word count in dictionary");
-        System.out.println("4. Output all words");
-        System.out.println("5. Program exit");
+        System.out.println("2. Translate russian word");
+        System.out.println("3. Translate english word");
+        System.out.println("4. Word count in dictionary");
+        System.out.println("5. Output all words");
         System.out.println("6. Program exit");
         System.out.print("Please choose: ");
     }
@@ -48,15 +55,18 @@ public class InputProcessor extends DictionaryService implements Console {
                 }
                 break;
             case 2:
-                findTranslate();
+                findTranslateRusToEng();
                 break;
             case 3:
-                wordCount();
+                findTranslateEngToRus();
                 break;
             case 4:
-                outputAllWords();
+                wordCount();
                 break;
             case 5:
+                outputAllWords();
+                break;
+            case 6:
                 isRunning = false;
                 printConsole("App closes.");
                 break;
@@ -64,8 +74,4 @@ public class InputProcessor extends DictionaryService implements Console {
                 printConsole("Invalid choice. Restarting app.\n");
         }
     }
-
-    private void findTranslate() {
-    }
-
 }
