@@ -8,14 +8,17 @@ import java.util.*;
 
 public class DictionaryService extends DictionaryDAO implements DictionaryInterface {
     boolean isRunning = true;
+
     public void putNewWord() throws IOException {
         Scanner words = new Scanner(System.in);
-        while (true) {
+        while (isRunning) {
             System.out.println("Enter russian word:");
             String rus = words.nextLine();
+            // rus.toUpperCase();
             System.out.println("Enter english translate:");
             String eng = words.nextLine();
-            dictMap.put(rus, eng);
+            // eng.toUpperCase();
+            dictMap.put(rus.toLowerCase(), eng.toUpperCase());
             System.out.println(rus + " = " + eng + " was added to the dictionary");
             System.out.println("Enter more? yes/no:");
             String choice = words.nextLine();
@@ -27,18 +30,17 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
 
     @Override
     public void saveWord() {
-        dictMap.put("Кот", "Cat");
-        dictMap.put("Лев", "Lion");
-        dictMap.put("Машина", "Car");
-        dictMap.put("Любовь", "Love");
-        dictMap.put("Бежать", "Run");
-        dictMap.put("Собака", "Dog");
-        dictMap.put("Я", "I");
-        dictMap.put("Делать", "Do");
-        dictMap.put("Польша", "Poland");
-        dictMap.put("Беларусь", "Belarus");
+        dictMap.put("кот", "сat");
+        dictMap.put("лев", "lion");
+        dictMap.put("машина", "car");
+        dictMap.put("любовь", "love");
+        dictMap.put("бежать", "run");
+        dictMap.put("собака", "dog");
+        dictMap.put("я", "i");
+        dictMap.put("делать", "do");
+        dictMap.put("польша", "poland");
+        dictMap.put("беларусь", "belarus");
     }
-
 
     @Override
     public void findTranslateRusToEng() throws DictionaryWordNotFoundException {
@@ -46,6 +48,7 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
         while (isRunning) {
             System.out.println("Enter russian word:");
             rus = words.nextLine();
+            rus = rus.toLowerCase();
             String translated = "";
             if (dictMap.containsKey(rus)) {
                 translated += dictMap.get(rus);
@@ -58,11 +61,9 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
             if (!choice.equals("yes")) {
                 break;
             }
+
         }
     }
-
-
-    HashMap<String, String> dictMap = new HashMap<>();
 
     public static String getKeyByValue(Map<String, String> dictMap, String value) {
         for (Map.Entry<String, String> entry : dictMap.entrySet()) {
@@ -79,14 +80,13 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
         while (true) {
             System.out.println("Enter english word:");
             eng = words.nextLine();
+            eng = eng.toLowerCase();
             String translated = "";
-
             translated += getKeyByValue(dictMap, eng);
-
             if (!dictMap.containsValue(eng)) {
-                System.out.println("Not found "+ eng +"." +" Enter another word");
+                System.out.println("Not found " + eng + "." + " Enter another word");
             } else
-            System.out.println(eng + " in russian is " + translated);
+                System.out.println(eng + " in russian is " + translated);
             System.out.println("Do you want to continue and enter more words? yes/no:");
             String choice = words.nextLine();
             if (!choice.equals("yes")) {
@@ -94,6 +94,7 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
             }
         }
     }
+
     @Override
     public void wordCount() {
         System.out.println(dictMap.size());
@@ -102,7 +103,7 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
     @Override
     public void outputAllWords() {
         for (Map.Entry entry : dictMap.entrySet()) {
-            System.out.println("Russian words: " + entry.getKey() + " English words: "
+            System.out.println("Russian words: = " + entry.getKey() + " English words: "
                     + entry.getValue());
         }
     }

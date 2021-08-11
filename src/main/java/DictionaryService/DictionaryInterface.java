@@ -1,4 +1,5 @@
 package DictionaryService;
+
 import Exception.DictionaryWordNotFoundException;
 import java.io.IOException;
 

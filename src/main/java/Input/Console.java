@@ -1,5 +1,7 @@
 package Input;
+
 import Exception.DictionaryWordNotFoundException;
+
 public interface Console {
     void main();
 
