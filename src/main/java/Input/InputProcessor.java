@@ -39,7 +39,8 @@ public class InputProcessor extends DictionaryService implements Console {
         System.out.println("3. Translate english word");
         System.out.println("4. Word count in dictionary");
         System.out.println("5. Output all words");
-        System.out.println("6. Program exit");
+        System.out.println("6. Quiz");
+        System.out.println("7. Program exit");
         System.out.print("Please choose: ");
     }
 
@@ -67,6 +68,9 @@ public class InputProcessor extends DictionaryService implements Console {
                 outputAllWords();
                 break;
             case 6:
+                quiz();
+                break;
+            case 7:
                 isRunning = false;
                 printConsole("App closes.");
                 break;

@@ -1,12 +1,15 @@
 package DictionaryService;
 
 import Exception.DictionaryWordNotFoundException;
+
 import java.io.IOException;
 
-public interface DictionaryInterface{
+public interface DictionaryInterface {
     void saveWord();
 
     void findTranslateEngToRus();
+
+    void quiz();
 
     void wordCount();
 

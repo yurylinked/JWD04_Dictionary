@@ -17,7 +17,7 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
             // rus.toUpperCase();
             System.out.println("Enter english translate:");
             String eng = words.nextLine();
-            // eng.toUpperCase();
+
             dictMap.put(rus.toLowerCase(), eng.toUpperCase());
             System.out.println(rus + " = " + eng + " was added to the dictionary");
             System.out.println("Enter more? yes/no:");
@@ -75,9 +75,25 @@ public class DictionaryService extends DictionaryDAO implements DictionaryInterf
     }
 
     @Override
+    public void quiz() {
+        Set<String> ruSet = dictMap.keySet();
+        Scanner words = new Scanner(System.in);
+        int wordCount = 0;
+        for (String key : ruSet) {
+            System.out.println("Enter translate word in russian: " + key);
+            rus = words.nextLine();
+            rus = rus.toLowerCase();
+            if (dictMap.containsValue(rus)) {
+                wordCount++;
+            }
+        }
+        System.out.println("Your result is " + wordCount + " points");
+    }
+
+    @Override
     public void findTranslateEngToRus() {
         Scanner words = new Scanner(System.in);
-        while (true) {
+        while (isRunning) {
             System.out.println("Enter english word:");
             eng = words.nextLine();
             eng = eng.toLowerCase();
